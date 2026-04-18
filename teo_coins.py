@@ -2,7 +2,9 @@ import asyncio
 import os
 import sys
 from playwright.async_api import async_playwright
-from playwright_stealth import stealth_async
+from playwright_stealth import stealth_page_sync, stealth_async
+# 如果还是报错，直接用下面这一行更通用的写法：
+import playwright_stealth
 
 # 获取 GitHub Actions 环境变量
 EMAIL = os.getenv("TEO_EMAIL")
@@ -29,6 +31,9 @@ async def run_bot():
         )
         page = await context.new_page()
         # 注入 Stealth 插件隐藏自动化特征
+        await stealth_async(page, playwright_stealth.StealthConfig())
+        # 或者最简单的一行：
+        from playwright_stealth import stealth_async
         await stealth_async(page)
 
         print("🚀 启动浏览器...")

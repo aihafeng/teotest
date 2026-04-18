@@ -73,7 +73,7 @@ async def run_bot():
         finally:
             await browser.close()
 
-if name == "__main__":
+if__name__== "__main__":
     if not EMAIL or not PASSWORD:
         print("错误: 请在环境变量中设置 TEO_EMAIL 和 TEO_PASSWORD")
         sys.exit(1)
